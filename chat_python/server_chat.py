@@ -9,10 +9,9 @@ def broadcast_data (sock, message):
     	#Nao envia a mensagem para o servidor e para o cliente que gerou a mensagem
         if socket != server_socket and socket != sock :
             socket.sendall(message)
-           
-     
+
 # Lista que armazena os decritores de sockets criados
-CONNECTION_LIST = []
+CONNECTION_LIST = [] ##
 RECV_BUFFER = 4096 # Aconselhável manter um valor potência de 2
 PORT = 5000 #Porta qualquer desde que livre para uso
  
