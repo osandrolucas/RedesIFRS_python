@@ -5,21 +5,6 @@ import time
 
 host = "localhost" #Mesmo IP do servidor
 
-def server_connection():
-    while True:
-        print('Trabalhando no servidor!')
-        time.sleep(1)
-
-def client_connection():
-    while True:
-        print('Trabalhando no cliente')
-        time.sleep(1)
-
-def message_monitor():
-    while True:
-        print('Trabalhando no monitor')
-        time.sleep(1)
-
 # Auxiliary function to read the txt file and
 def get_node_port(node_name):
     fileLines = open('node_map.txt', 'r').readlines()
@@ -50,15 +35,15 @@ except:
 node_port = get_node_port(NODE_NAME)
 
 # Start server socket
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #ok
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #ok
 server_socket.bind(('0.0.0.0', node_port)) #Ouvindo na porta que foi passada como argumento
 server_socket.listen(3) #vizinhos/conexões. Se tiver mais, aumentar
 
 # Store socket objects used to establishes pending connection and send messages
 CONNECTION_LIST = []
 PENDING_CONNECTION = [] #Guarda os nomes/portas dos vizinhos
-RECV_BUFFER = 4096 # Aconselhável manter um valor potência de 2
+RECV_BUFFER = 4096 #Aconselhável manter um valor potência de 2
 
 print("Node ", NODE_NAME, " initialized at port ", node_port)
 
