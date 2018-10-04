@@ -6,7 +6,6 @@ import threading
 
 ### Variables ###
 host = str.upper(socket.gethostname())
-port = 5000
 CONNECTION_LIST = []
 PENDING_CONNECTION = [] #Guarda os nomes/portas dos vizinhos
 RECV_BUFFER = 4096 #Aconselhável manter um valor potência de 2
@@ -68,7 +67,6 @@ try:
     #s.bind(('0.0.0.0', node_port))
 
     host = str.upper(socket.gethostname())
-    #port = 5000
 
     print('INFORMAÇÃO: O servidor será iniciado no Host {} através da porta {}.'.format(host, node_port))
     s.bind((host,node_port)) #Ouvindo na porta que foi passada como argumento
@@ -77,7 +75,7 @@ try:
     print("")
 
     try:
-        s.listen(1)
+        s.listen(4)
         conn, addr = s.accept()
         n = str(conn.getsockname())
         ns = n.split()
