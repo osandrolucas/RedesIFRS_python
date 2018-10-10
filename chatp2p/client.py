@@ -1,6 +1,7 @@
 import socket
 import sys
 from emoji import emojize
+import threading
 
 ### Functions ###
 
@@ -8,13 +9,17 @@ def prompt():
     sys.stdout.write('>>')
     sys.stdout.flush()
 
+def worker():
+    print(emojize('Thread Servidor Iniciada com Sucesso! :smile:\n', use_aliases=True))
+    return
+
 # Auxiliary function to read the txt file and
 def get_node_port(node_name):
     fileLines = open('node_map.txt', 'r').readlines()
     for line in fileLines:
         # Remove o \n do final da linha
         line = line.rstrip()
-        if node_name in line:
+        if str.upper(node_name) in line:
             return int(line.split('|')[1])
     sys.exit("ERROR: Node name ", node_name, " not found!")
 
@@ -32,6 +37,8 @@ try:
         s.connect((host, node_port))
         print('\nSucesso! Você entrou no Chat P2P através do servidor "{}" na porta "{}".'.format(host, node_port))
         print(emojize('Status da conexão: :on:', use_aliases=True))
+        t = threading.Thread(target=worker(), args=("thread sendo executada",))
+        t.start()
         print(emojize('Aguardando uma mensagem do Servidor :clock12: :clock2: :clock3: :clock4: :clock5: ...',use_aliases=True))
         while 1:
             # Recebendo
