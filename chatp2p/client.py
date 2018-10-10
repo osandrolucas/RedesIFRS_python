@@ -2,6 +2,7 @@ import socket
 import sys
 import time
 from emoji import emojize
+import threading
 
 s = socket.socket()
 host = str.upper(input('Por favor, insira o nome do servidor para se conectar: '))
